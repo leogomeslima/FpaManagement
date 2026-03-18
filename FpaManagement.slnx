@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/FpaManagement.API/FpaManagement.API.csproj" />
+    <Project Path="src/FpaManagement.Application/FpaManagement.Application.csproj" />
+    <Project Path="src/FpaManagement.Client/FpaManagement.Client.csproj" />
+    <Project Path="src/FpaManagement.Domain/FpaManagement.Domain.csproj" />
+    <Project Path="src/FpaManagement.Infrastructure/FpaManagement.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/FpaManagement.Application.Tests/FpaManagement.Application.Tests.csproj" />
+    <Project Path="tests/FpaManagement.Domain.Tests/FpaManagement.Domain.Tests.csproj" />
+    <Project Path="tests/FpaManagement.Infrastructure.Tests/FpaManagement.Infrastructure.Tests.csproj" />
+    <Project Path="tests/FpaManagement.Integration.Tests/FpaManagement.Integration.Tests.csproj" />
+  </Folder>
+</Solution>
