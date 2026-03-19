@@ -1,9 +1,8 @@
-namespace FpaManagement.Domain.Enums
+namespace FpaManagement.Domain.Enums;
+
+public enum CashFlowCategoryType
 {
-    public enum CashFlowCategory
-    {
-        Operational = 1,
-        Investing = 2,
-        Financing = 3
-    }
+    Operating = 1,
+    Investing = 2,
+    Financing = 3
 }
