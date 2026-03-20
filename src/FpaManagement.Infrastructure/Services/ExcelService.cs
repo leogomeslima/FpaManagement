@@ -1,5 +1,3 @@
-using System.ComponentModel;
-using System.Reflection;
 using FpaManagement.Application.Common.Interfaces;
 using Microsoft.Extensions.Logging;
 using OfficeOpenXml;
@@ -11,10 +9,12 @@ public class ExcelService : IExcelService
 {
     private readonly ILogger<ExcelService> _logger;
 
+    // Avaliar a mudança
+    [Obsolete]
     public ExcelService(ILogger<ExcelService> logger)
     {
         _logger = logger;
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+        ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
     }
 
     public byte[] GenerateExcel<T>(IEnumerable<T> data, string sheetName = "Sheet1", Dictionary<string, string>? headers = null)

@@ -92,7 +92,7 @@ public class PdfService : IPdfService
                             row.RelativeItem().AlignRight().Text($"Status: {budget.Status}");
                         });
 
-                        column.Item().LineHorizontal(1, Colors.Gray.Medium);
+                        column.Item().LineHorizontal(1).LineColor(Colors.Grey.Medium);
                     });
 
                 page.Content()
@@ -188,7 +188,7 @@ public class PdfService : IPdfService
                         column.Item().Text($"Período: {startDate:dd/MM/yyyy} a {endDate:dd/MM/yyyy}")
                             .FontSize(12);
 
-                        column.Item().LineHorizontal(1, Colors.Gray.Medium);
+                        column.Item().LineHorizontal(1).LineColor(Colors.Grey.Medium);
                     });
 
                 page.Content()
