@@ -43,8 +43,39 @@ public class ForecastItem : BaseAuditableEntity
     private ForecastItem()
     {
     }
+    public void Update(
+        string category,
+        string? subCategory,
+        string description,
+        Money amount,
+        Guid? costCenterId,
+        string? accountCode)
+    {
+        if (string.IsNullOrWhiteSpace(category))
+            throw new ArgumentException("A categoria é obrigatória.", nameof(category));
 
-    public ForecastItem(Guid forecastVersionId, string category, string description, Money amount, string? subCategory = null, Guid? costCenterId = null, string? accountCode = null)
+        if (amount == null)
+            throw new ArgumentNullException(nameof(amount));
+
+        Category = category;
+        SubCategory = subCategory;
+        Description = description;
+        Amount = amount;
+        CostCenterId = costCenterId;
+        AccountCode = accountCode;
+
+        // O interceptor cuidará do UpdatedAt
+    }
+
+    public ForecastItem(
+        Guid forecastVersionId,
+        string category,
+        string description,
+        Money amount,
+        string? subCategory = null,
+        Guid? costCenterId = null,
+        string? accountCode = null
+        )
     {
         ForecastVersionId = forecastVersionId;
         Category = category;
