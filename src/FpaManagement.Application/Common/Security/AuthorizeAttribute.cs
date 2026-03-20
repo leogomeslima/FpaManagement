@@ -1,6 +1,6 @@
 namespace FpaManagement.Application.Common.Security;
 
-[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
 public class AuthorizeAttribute : Attribute
 {
     public string? Roles { get; set; }

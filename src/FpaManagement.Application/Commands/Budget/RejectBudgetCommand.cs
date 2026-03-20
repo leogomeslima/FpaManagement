@@ -2,7 +2,6 @@ using FpaManagement.Application.Common.Exceptions;
 using FpaManagement.Application.Common.Interfaces;
 using FpaManagement.Application.Common.Models;
 using FpaManagement.Application.Common.Security;
-using FpaManagement.Domain.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -55,7 +54,7 @@ public class RejectBudgetCommandHandler : IRequestHandler<RejectBudgetCommand, R
 
             return Result.Success("Orçamento rejeitado");
         }
-        catch (InvalidOperationException ex)
+        catch (Domain.Exceptions.InvalidOperationException ex)
         {
             return Result.Failure(ex.Message);
         }

@@ -1,57 +1,45 @@
-using AutoMapper;
 using FpaManagement.Application.Common.Exceptions;
 using FpaManagement.Application.Common.Interfaces;
 using FpaManagement.Application.Common.Models;
 using FpaManagement.Application.Common.Security;
-using FpaManagement.Application.DTOs.User;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace FpaManagement.Application.Commands.User;
 
 [Authorize(Permissions = "ManageUsers")]
-public class UpdateUserCommand : IRequest<Result<UserDto>>
+public class ActivateUserCommand : IRequest<Result>
 {
     public Guid Id { get; set; }
-    public UpdateUserDto Data { get; set; } = null!;
 }
 
-public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Result<UserDto>>
+public class ActivateUserCommandHandler : IRequestHandler<ActivateUserCommand, Result>
 {
     private readonly IApplicationDbContext _context;
-    private readonly IMapper _mapper;
     private readonly ICurrentUserService _currentUserService;
 
-    public UpdateUserCommandHandler(
+    public ActivateUserCommandHandler(
         IApplicationDbContext context,
-        IMapper mapper,
         ICurrentUserService currentUserService)
     {
         _context = context;
-        _mapper = mapper;
         _currentUserService = currentUserService;
     }
 
-    public async Task<Result<UserDto>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(ActivateUserCommand request, CancellationToken cancellationToken)
     {
         var user = await _context.Users
             .FirstOrDefaultAsync(u => u.Id == request.Id && !u.IsDeleted, cancellationToken);
         if (user == null)
             throw new NotFoundException(nameof(Domain.Entities.User), request.Id);
 
-        user.Update(request.Data.FirstName, request.Data.LastName, request.Data.PhoneNumber);
-        if (request.Data.IsActive != user.IsActive)
-        {
-            if (request.Data.IsActive)
-                user.Activate();
-            else
-                user.Deactivate();
-        }
+        if (user.IsActive)
+            return Result.Success("Usuário já está ativo.");
 
+        user.Activate();
         user.UpdatedBy = _currentUserService.UserEmail ?? "system";
         await _context.SaveChangesAsync(cancellationToken);
 
-        var dto = _mapper.Map<UserDto>(user);
-        return Result<UserDto>.Success(dto, "Usuário atualizado com sucesso.");
+        return Result.Success("Usuário ativado com sucesso.");
     }
 }

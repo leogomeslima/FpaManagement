@@ -88,4 +88,10 @@ public class Forecast : BaseAuditableEntity
             throw new InvalidOperationException("Forecast must be Submitted to reject.");
         Status = ForecastStatus.Rejected;
     }
+    public void UpdateTotalAmount(Money total)
+    {
+        TotalAmount = total ?? throw new ArgumentNullException(nameof(total));
+        // Se desejar, você pode adicionar lógica aqui para disparar um 
+        // evento de domínio informando que o valor do Forecast mudou.
+    }
 }

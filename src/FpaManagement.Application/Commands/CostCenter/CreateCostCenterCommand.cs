@@ -4,8 +4,6 @@ using FpaManagement.Application.Common.Interfaces;
 using FpaManagement.Application.Common.Models;
 using FpaManagement.Application.Common.Security;
 using FpaManagement.Application.DTOs.CostCenter;
-using FpaManagement.Domain.Entities;
-using FpaManagement.Domain.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,6 +1,5 @@
 using FpaManagement.Application.Common.Mappings;
 using FpaManagement.Application.DTOs.Common;
-using FpaManagement.Domain.Entities;
 using FpaManagement.Domain.Enums;
 
 namespace FpaManagement.Application.DTOs.Budget;

@@ -1,6 +1,96 @@
-@FpaManagement.API_HostAddress = http://localhost:5281
+@baseUrl = https://localhost:7001
+@token = 
 
-GET {{FpaManagement.API_HostAddress}}/weatherforecast/
-Accept: application/json
+### Autenticação
 
-###
+# Login
+POST {{baseUrl}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@fpa.local",
+  "password": "Admin@123",
+  "rememberMe": false
+}
+
+### Departamentos
+
+# Listar departamentos
+GET {{baseUrl}}/api/v1/departments?pageNumber=1&pageSize=10
+Authorization: Bearer {{token}}
+
+# Buscar departamento por ID
+GET {{baseUrl}}/api/v1/departments/00000000-0000-0000-0000-000000000000
+Authorization: Bearer {{token}}
+
+# Criar departamento
+POST {{baseUrl}}/api/v1/departments
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "code": "MKT",
+  "name": "Marketing",
+  "description": "Departamento de Marketing"
+}
+
+### Centros de Custo
+
+# Listar centros de custo
+GET {{baseUrl}}/api/v1/costcenters?pageNumber=1&pageSize=10
+Authorization: Bearer {{token}}
+
+# Criar centro de custo
+POST {{baseUrl}}/api/v1/costcenters
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "code": "MKT-DIGITAL",
+  "name": "Marketing Digital",
+  "description": "Centro de custo de marketing digital",
+  "departmentId": "00000000-0000-0000-0000-000000000000"
+}
+
+### Orçamentos
+
+# Listar orçamentos
+GET {{baseUrl}}/api/v1/budgets?fiscalYear=2024&pageNumber=1&pageSize=10
+Authorization: Bearer {{token}}
+
+# Criar orçamento
+POST {{baseUrl}}/api/v1/budgets
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Orçamento 2024 - Marketing",
+  "description": "Orçamento anual do departamento de marketing",
+  "fiscalYear": 2024,
+  "departmentId": "00000000-0000-0000-0000-000000000000",
+  "versionName": "Versão Inicial"
+}
+
+# Adicionar item ao orçamento
+POST {{baseUrl}}/api/v1/budgets/items
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "budgetVersionId": "00000000-0000-0000-0000-000000000000",
+  "category": "Marketing Digital",
+  "description": "Campanhas Google Ads",
+  "plannedAmount": 50000,
+  "currency": "BRL"
+}
+
+# Submeter orçamento para aprovação
+POST {{baseUrl}}/api/v1/budgets/00000000-0000-0000-0000-000000000000/submit
+Authorization: Bearer {{token}}
+
+# Aprovar orçamento
+POST {{baseUrl}}/api/v1/budgets/00000000-0000-0000-0000-000000000000/approve
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+"Orçamento aprovado conforme planejado"

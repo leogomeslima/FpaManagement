@@ -42,6 +42,7 @@ public class CostCenter : BaseAuditableEntity
     public virtual ICollection<BudgetItem> BudgetItems { get; private set; } = new List<BudgetItem>();
     public virtual ICollection<Revenue> Revenues { get; private set; } = new List<Revenue>();
     public virtual ICollection<Expense> Expenses { get; private set; } = new List<Expense>();
+    public virtual ICollection<CashFlowEntry> CashFlowEntries { get; private set; } = new List<CashFlowEntry>();
 
     private CostCenter()
     {
