@@ -59,8 +59,8 @@ public class UpdateForecastItemCommandHandler : IRequestHandler<UpdateForecastIt
 
         item.UpdatedBy = _currentUserService.UserEmail ?? "system";
 
-        // Recalcular total da versão
-        item.ForecastVersion.Forecast.TotalAmount = item.ForecastVersion.CalculateTotal();
+        var newTotal = item.ForecastVersion.CalculateTotal();
+        item.ForecastVersion.Forecast.UpdateTotalAmount(newTotal);
 
         await _context.SaveChangesAsync(cancellationToken);
 
