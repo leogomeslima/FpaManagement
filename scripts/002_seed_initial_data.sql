@@ -51,7 +51,7 @@ GO
 -- Inserir perfis (roles)
 INSERT INTO [identity].[Roles] (Id, Name, NormalizedName, Description, IsActive, CreatedAt)
 VALUES 
-    (NEWID(), 'Admin', 'ADMIN', 'Administrador do sistema', 1, GETUTCDATE()),
+    (NEWID(), 'Admin', 'ADMIN', 'Administrador do sistema', 1, GETUTCDATE()), 
     (NEWID(), 'Controller', 'CONTROLLER', 'Controller financeiro', 1, GETUTCDATE()),
     (NEWID(), 'Financeiro', 'FINANCEIRO', 'Usuário do financeiro', 1, GETUTCDATE()),
     (NEWID(), 'Gestor', 'GESTOR', 'Gestor de área', 1, GETUTCDATE())
